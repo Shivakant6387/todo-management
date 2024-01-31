@@ -1,8 +1,8 @@
 package com.example.todo.management.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,14 +16,17 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SpringSecurityConfig {
+
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+    public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeHttpRequests((authorization)->{
+        http.csrf().disable().authorizeHttpRequests((authorization) -> {
 //            authorization.requestMatchers(HttpMethod.POST,"/api/**").hasRole("ADMIN");
 //            authorization.requestMatchers(HttpMethod.PUT,"/api/**").hasRole("ADMIN");
 //            authorization.requestMatchers(HttpMethod.DELETE,"/api/**").hasRole("ADMIN");
@@ -34,23 +37,24 @@ public class SpringSecurityConfig {
         }).httpBasic(Customizer.withDefaults());
         return http.build();
     }
+
     @Bean
-    public UserDetailsService userDetailsService(){
-        UserDetails shiva= User.builder()
+    public UserDetailsService userDetailsService() {
+        UserDetails shiva = User.builder()
                 .username("shiva")
                 .password(passwordEncoder().encode("Indian@#2024%$#"))
                 .roles("USER")
                 .build();
-        UserDetails admin= User.builder()
+        UserDetails admin = User.builder()
                 .username("admin")
                 .password(passwordEncoder().encode("Indian@#2024%$#"))
                 .roles("ADMIN")
                 .build();
-        UserDetails manager= User.builder()
+        UserDetails manager = User.builder()
                 .username("manager")
                 .password(passwordEncoder().encode("Indian@#2024%$#"))
                 .roles("MANAGER")
                 .build();
-        return new InMemoryUserDetailsManager(shiva,admin,manager);
+        return new InMemoryUserDetailsManager(shiva, admin, manager);
     }
 }
