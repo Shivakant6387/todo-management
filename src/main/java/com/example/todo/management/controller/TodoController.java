@@ -27,10 +27,22 @@ public class TodoController {
         TodoDto todoDto = todoService.getTodo(id);
         return new ResponseEntity<>(todoDto, HttpStatus.OK);
     }
+
     @GetMapping
-    public ResponseEntity<List<TodoDto>>getAllTodo(){
-       List<TodoDto> todo=todoService.getAllTodo();
+    public ResponseEntity<List<TodoDto>> getAllTodo() {
+        List<TodoDto> todo = todoService.getAllTodo();
         return ResponseEntity.ok(todo);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<TodoDto> updateTodo(@RequestBody TodoDto todoDto, @PathVariable long id) {
+        TodoDto updatedTodo = todoService.updateTodo(todoDto, id);
+        return ResponseEntity.ok(updatedTodo);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteTodo(@PathVariable long id) {
+        todoService.delete(id);
+        return ResponseEntity.ok("Todo deleted successfully!.");
+    }
 }
