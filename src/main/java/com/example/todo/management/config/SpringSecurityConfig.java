@@ -48,23 +48,23 @@ public class SpringSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails shiva = User.builder()
-                .username("shiva")
-                .password(passwordEncoder().encode("Indian@#2024%$#"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("Indian@#2024%$#"))
-                .roles("ADMIN")
-                .build();
-        UserDetails manager = User.builder()
-                .username("manager")
-                .password(passwordEncoder().encode("Indian@#2024%$#"))
-                .roles("MANAGER")
-                .build();
-        return new InMemoryUserDetailsManager(shiva, admin, manager);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails shiva = User.builder()
+//                .username("shiva")
+//                .password(passwordEncoder().encode("Indian@#2024%$#"))
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password(passwordEncoder().encode("Indian@#2024%$#"))
+//                .roles("ADMIN")
+//                .build();
+//        UserDetails manager = User.builder()
+//                .username("manager")
+//                .password(passwordEncoder().encode("Indian@#2024%$#"))
+//                .roles("MANAGER")
+//                .build();
+//        return new InMemoryUserDetailsManager(shiva, admin, manager);
+//    }
 }
